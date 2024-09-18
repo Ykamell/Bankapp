@@ -1,0 +1,11 @@
+.rows-number {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .add-user-btn, .see-more-btn{
+    width: 60px;
+    font-size: 14px;
+    height: 60px;
+  }
+}

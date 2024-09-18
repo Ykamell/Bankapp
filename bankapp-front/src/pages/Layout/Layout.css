@@ -1,0 +1,11 @@
+.layout-container {
+  height: 100vh;
+  width: 100%;
+  /* background-image: linear-gradient(to left bottom, #9dc8f7, #8cc2fc, #79b4f3, #80baf7, #66ace9);   */
+}
+
+.layout-body {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5%;
+}

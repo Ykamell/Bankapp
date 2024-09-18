@@ -1,0 +1,53 @@
+.header-layout {
+  background-color: #7fb9f7;
+}
+
+.container-header {
+  padding: 1% 0%;
+}
+
+.brand-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.bank-name {
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.user-dropdown {
+  color: white;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.role-label {
+  color: rgb(235, 235, 235);
+}
+
+@media screen and (max-width: 575px) {
+  .container-header {
+    max-width: 350px;
+  }
+
+  .bank-name {
+    font-size: 24px;
+  }
+
+  .role-label {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .container-header {
+    max-width: 300px;
+  }
+}

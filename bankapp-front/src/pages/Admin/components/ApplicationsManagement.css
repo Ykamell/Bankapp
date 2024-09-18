@@ -1,0 +1,21 @@
+.rows-number {
+  font-size: 14px;
+}
+
+.approved-btn {
+  background-color: green;
+  border-color: green;
+}
+
+.reject-btn {
+  background-color: red;
+  border-color: red;
+}
+
+@media screen and (max-width: 768px) {
+  .approved-btn, .see-user-btn, .rejected-btn{
+    width: 60px;
+    font-size: 14px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,6 @@
+.user-actions, .product-actions, .application-actions{
+  padding: 2% 0%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1%;
+}
