@@ -4,7 +4,7 @@ const applicationsModel = require('../models/applications.model');
 
 
 exports.getApplications = async (req, res) => {
-  const result = await applicationsModel.getProducts();
+  const result = await applicationsModel.getApplications();
   if (result.hasError) {
     return res.status(400).json({ message: 'error', result: result.error });
   }
@@ -28,8 +28,8 @@ exports.getApplicationsByUser = async (req, res) => {
 }
 
 exports.createApplication = async (req, res) => {
-  const { application_id, user_id, product_type_id, amount, cvv, expire_year, expire_month } = req.body;
-  const result = await applicationsModel.createApplication({ application_id, user_id, product_type_id, amount, cvv, expire_year, expire_month });
+  const { product_type_id, user_id, admin_user_id, desired_amount } = req.body;
+  const result = await applicationsModel.createApplication({ product_type_id, user_id, admin_user_id, desired_amount });
   if (result.hasError) {
     return res.status(400).json({ message: 'error', result: result.error });
   }
@@ -38,7 +38,7 @@ exports.createApplication = async (req, res) => {
 
 exports.updateApplication = async (req, res) => {
   const { amount, expire_year, expire_month } = req.body;
-  const result = await applicationsModel.updateApplication({ amount, expire_year, expire_month });
+  const result = await applicationsModel.updateApplication({ amount, expire_year, expire_month }, req.params.id);
   if (result.hasError) {
     return res.status(400).json({ message: 'error', result: result.error });
   }

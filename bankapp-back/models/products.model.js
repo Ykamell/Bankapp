@@ -28,7 +28,7 @@ const createProduct = ({ application_id, user_id, product_type_id, amount, cvv, 
     return result;
 }
 
-const updateProduct = ({ amount, expire_year, expire_month }) => {
+const updateProduct = ({ amount, expire_year, expire_month }, id) => {
   const result = dbConfig.query(
     'UPDATE products SET amount = $1, expire_year = $2, expire_month = $3 WHERE id = $4',
     [amount, expire_year, expire_month, id])

@@ -43,7 +43,7 @@ const createUser = ({ name, lastname, users_role_id, password, address, email, b
     return result;
 }
 
-const updateUser = ({ id, name, lastname, password, address, email, birthdate, document_number }) => {
+const updateUser = ({ name, lastname, password, address, email, birthdate, document_number }, id) => {
   const result = dbConfig.query(
     'UPDATE users SET name = $1, lastname = $2, password = $3, address = $4, email = $5, birthdate = $6, document_number = $7 WHERE id = $8',
     [name, lastname, password, address, email, birthdate, document_number, id])

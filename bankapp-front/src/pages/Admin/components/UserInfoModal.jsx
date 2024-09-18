@@ -78,7 +78,6 @@ export const UserInfoModal = (props) => {
       expire_month: (productsByUser[index].expire_month).toString(),
       expire_year: (productsByUser[index].expire_year).toString(),
     };
-    console.log(productData);
     updateProduct(productsByUser[index].id, productData)
       .then(() => {
         alert('Product updated successfully');
@@ -121,10 +120,9 @@ export const UserInfoModal = (props) => {
     updateApplication(applicationsByUser[index].id, applicationData)
       .then(() => {
         alert('Product updated successfully');
-        console.log(applicationsByUser[index].application_status_id)
-        if (applicationsByUser[index].application_status_id == 2) {
+        if (applicationsByUser[index].application_status_id === 2) {
           handleApproveApplication(applicationData);
-        } else if (applicationsByUser[index].application_status_id == 3) {
+        } else if (applicationsByUser[index].application_status_id === 3) {
           handleRejectApplication(applicationData);
         }
         setEditApplication(false);
@@ -208,10 +206,8 @@ export const UserInfoModal = (props) => {
   };
 
   useEffect(() => {
-    console.log(selectedUser)
     getProductsByUser(selectedUser.id)
     .then((response) => {
-      console.log("Aqui estoy: ", response);
       setProductsByUser(response);
     })
     .catch((e) => console.log('Hubo un problema: ', e));

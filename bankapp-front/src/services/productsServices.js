@@ -47,7 +47,7 @@ const getProductById = (productId) => {
 };
 
 const getProductsByUser = (userId) => {
-  const url = `users/products/${userId}`;
+  const url = `/products/users/${userId}`;
   return request(url, 'get').then((response) => {
     const products = response.data;
     return products.map((product) => {

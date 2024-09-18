@@ -1,26 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import Form from 'react-bootstrap/Form';
+import { getProductsByUser } from '../../../services/productsServices';
 
 export const UserLoans = () => {
   const [rowsPerPage, setRowsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [loans, setLoans] = useState([]);
 
-  const data = [
-    { id: 1, name: 'Table cell 1' },
-    { id: 2, name: 'Table cell 2' },
-    { id: 3, name: 'Table cell 3' },
-    { id: 4, name: 'Table cell 4' },
-    { id: 5, name: 'Table cell 5' },
-    { id: 6, name: 'Table cell 6' },
-    { id: 7, name: 'Table cell 7' },
-    { id: 8, name: 'Table cell 8' },
-    { id: 9, name: 'Table cell 9' },
-    { id: 10, name: 'Table cell 10' },
-  ];
+  const currentUserId = localStorage.getItem('userId');
+  
+  useEffect(() => {
+    getProductsByUser(currentUserId)
+    .then((response) => {
+      setProducts(response); 
+    })
+    .catch(error => {
+      console.error("Error fetching user data:", error);
+    });    
+  }, []);
 
-  const totalRows = data.length;
+  useEffect(() => {
+    if (products.length > 0) {
+      const filteredLoans = products.filter(product => 
+        product.product_type_id === 3 );
+        
+      setLoans(filteredLoans);
+    }
+  }, [products]);
+
+  const totalRows = loans.length;
   const totalPages = Math.ceil(totalRows / rowsPerPage);
 
   const handleRowsPerPageChange = (e) => {
@@ -29,7 +40,7 @@ export const UserLoans = () => {
   };
 
   const startIndex = (currentPage - 1) * rowsPerPage;
-  const currentRows = data.slice(startIndex, startIndex + rowsPerPage);
+  const currentRows = loans.slice(startIndex, startIndex + rowsPerPage);
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -40,25 +51,17 @@ export const UserLoans = () => {
   return (
     <>
       <Table responsive="sm">
-        <thead>
+      <thead>
           <tr>
-            <th>#</th>
-            <th>Row Name</th>
-            <th>Edad</th>
-            <th>Otro</th>
-            <th>Saldo</th>
-            <th>Si</th>
+            <th>Amount</th>
+            <th>Number</th>
           </tr>
         </thead>
         <tbody>
-          {currentRows.map((row) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>23</td>
-              <td>Otro</td>
-              <td>0</td>
-              <td>No</td>
+          {currentRows.map((loan, index) => (
+            <tr key={loan.id}>
+              <td>{loan.amount}</td>
+              <td>{loan.number}</td>
             </tr>
           ))}
         </tbody>

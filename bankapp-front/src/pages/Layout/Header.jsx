@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -9,8 +10,24 @@ import './Header.css'
 import { VerticalModal } from '../Modal/Modal';
 
 
-const Header = ({role}) => {
-  const [userModalShow, setUserModalShow] = React.useState(false);
+const Header = ({role, id}) => {
+  const [currentUser, setCurrentUser] = useState({});
+  const navigate = useNavigate();
+  const [userModalShow, setUserModalShow] = useState(false);
+  const [edit, setEdit] = useState(false);
+
+  const currentUserId = localStorage.getItem('userId');
+
+
+  const [formValues, setFormValues] = useState({
+    name: currentUser.name,
+    lastname: currentUser.lastname,
+    email: currentUser.email,
+    address: currentUser.address,
+    birthdate: currentUser.birthdate,
+    password: currentUser.password,
+    document: currentUser.document
+  });
 
   const user = (
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -19,7 +36,16 @@ const Header = ({role}) => {
     </svg>
   );
 
-  return (
+  const handleLogOff = () => {
+    localStorage.removeItem('role');
+    localStorage.removeItem('userId');
+  
+    setTimeout(() => {
+      navigate('/');
+    }, 1000); 
+  };
+
+    return (
     <Navbar className="header-layout">
       <Container className='container-header'>
         <Navbar.Brand href="#home" className='brand-header'>
@@ -35,8 +61,8 @@ const Header = ({role}) => {
         <NavDropdown title={user} id="basic-nav-dropdown" className='user-dropdown'>
           <NavDropdown.Item href="#action/3.1"><Button onClick={() => setUserModalShow(true)}>Edit</Button></NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">
-            Log Off
+          <NavDropdown.Item>
+          <Button onClick={handleLogOff}>Log Off</Button>
           </NavDropdown.Item>
         </NavDropdown>
       </Container>
@@ -45,20 +71,10 @@ const Header = ({role}) => {
         show={userModalShow}
         onHide={() => setUserModalShow(false)} 
         request="Edit My Profile"
+        id={id}
       >
         <>
-          <Form.Group controlId="nombre">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control type="text" placeholder="Enter name" />
-          </Form.Group>
-          <Form.Group controlId="valor">
-            <Form.Label>Valor</Form.Label>
-            <Form.Control type="number" placeholder="Enter value" />
-          </Form.Group>
-          <Form.Group controlId="direccion">
-            <Form.Label>Dirección</Form.Label>
-            <Form.Control type="text" placeholder="Enter address" />
-          </Form.Group>
+          
         </>
       </VerticalModal>
     </Navbar>

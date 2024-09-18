@@ -28,7 +28,7 @@ const createApplication = ({ product_type_id, user_id, admin_user_id, desired_am
     return result;
 }
 
-const updateApplication = ({ product_type_id, admin_user_id, application_status_id, desired_amount }) => {
+const updateApplication = ({ product_type_id, admin_user_id, application_status_id, desired_amount }, id) => {
   const updated_at = new Date();
   const result = dbConfig.query(
     'UPDATE applications SET product_type_id = $1, admin_user_id = $2, application_status_id = $3, desired_amount = $4, updated_at = $5 WHERE id = $6',

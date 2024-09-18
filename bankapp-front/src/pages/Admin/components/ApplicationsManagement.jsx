@@ -69,8 +69,6 @@ export const ApplicationsManagement = () => {
   const handleApproveApplication =  async (application) => {
     try {
       const cvv = Math.floor(Math.random() * 900) + 100;
-      console.log(cvv);
-
       const updateData = {
         product_type_id: application.product_type_id,
         desired_amount: application.desired_amount,
@@ -115,7 +113,6 @@ export const ApplicationsManagement = () => {
 
       Promise.all(usersPromises)
         .then((usersResults) => {
-          console.log(usersResults)
           setUsers(usersResults.flat());
         })
         .catch((error) => console.error('Error fetching users:', error));

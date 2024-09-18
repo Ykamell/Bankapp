@@ -46,7 +46,7 @@ const getApplicationById = (applicationId) => {
 };
 
 const getApplicationsByUser = (userId) => {
-  const url = `users/applications/${userId}`;
+  const url = `applications/users/${userId}`;
   return request(url, 'get').then((response) => {
     const applications = response.data;
     return applications.map((application) => {
@@ -69,7 +69,7 @@ const getApplicationsByUser = (userId) => {
 };
 
 const getUserByApplicationId = (applicationId) => {
-  const url = `applications/users/${applicationId}`;
+  const url = `users/applications/${applicationId}`;
   return request(url, 'get').then((response) => {
     const user = response.data[0];
     return {

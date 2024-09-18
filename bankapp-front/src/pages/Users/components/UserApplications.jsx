@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import Form from 'react-bootstrap/Form';
+import { getApplicationsByUser } from '../../../services/applicationsServices';
 
-export const UserApplications = () => {
+export const UserApplications = (refreshApplication) => {
   const [rowsPerPage, setRowsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
+  const [applications, setApplications] = useState([]);
+
+  const currentUserId = localStorage.getItem('userId');
   
-  const data = [
-    { id: 1, name: 'Table cell 1' },
-    { id: 2, name: 'Table cell 2' },
-    { id: 3, name: 'Table cell 3' },
-    { id: 4, name: 'Table cell 4' },
-    { id: 5, name: 'Table cell 5' },
-    { id: 6, name: 'Table cell 6' },
-    { id: 7, name: 'Table cell 7' },
-    { id: 8, name: 'Table cell 8' },
-    { id: 9, name: 'Table cell 9' },
-    { id: 10, name: 'Table cell 10' },
-  ];
-  
-  const totalRows = data.length;
+  const refreshApplications = () => {
+    getApplicationsByUser(currentUserId)
+    .then((response) => {
+      setApplications(response); 
+    })
+    .catch((e) => console.log('Error: ', e));
+  };
+
+  useEffect(() => {
+    getApplicationsByUser(currentUserId)
+    .then((response) => {
+      setApplications(response); 
+    })
+    .catch(error => {
+      console.error("Error fetching user data:", error);
+    });    
+  }, []);
+
+  useEffect(() => {
+    refreshApplications()
+  }, [refreshApplication])
+
+  const totalRows = applications.length;
   const totalPages = Math.ceil(totalRows / rowsPerPage);
 
   const handleRowsPerPageChange = (e) => {
@@ -29,10 +42,33 @@ export const UserApplications = () => {
   };
 
   const startIndex = (currentPage - 1) * rowsPerPage;
-  const currentRows = data.slice(startIndex, startIndex + rowsPerPage);
+  const currentRows = applications.slice(startIndex, startIndex + rowsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const productTypeText = (productTypeId) => {
+    switch (productTypeId) {
+      case 1:
+        return 'Credit Card';
+      case 2:
+        return 'Debit Card';
+      case 3:
+        return 'Loan';
+      default:
+        return 'Debit Card';
+    }
+  };
+
+  const getStatusText = (statusId) => {
+    switch (statusId) {
+      case 2:
+        return 'Approved';
+      case 3:
+        return 'Rejected';
+      default:
+        return 'Pending';    }
   };
 
   return (
@@ -40,23 +76,17 @@ export const UserApplications = () => {
       <Table responsive="sm">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Row Name</th>
-            <th>Edad</th>
-            <th>APPLICATIONS</th>
-            <th>Saldo</th>
-            <th>Si</th>
+            <th>Product Type</th>
+            <th>Desired Amount</th>
+            <th>Application Status</th>
           </tr>
         </thead>
         <tbody>
-          {currentRows.map((row, index) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>23</td>
-              <td>Otro</td>
-              <td>0</td>
-              <td>No</td>
+          {currentRows.map((application, index) => (
+            <tr key={application.id}>
+              <td>{productTypeText(application.product_type_id)}</td>
+              <td>{application.desired_amount}</td>
+              <td>{getStatusText(application.application_status_id)}</td>
             </tr>
           ))}
         </tbody>

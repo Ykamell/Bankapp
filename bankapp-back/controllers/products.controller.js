@@ -38,7 +38,7 @@ exports.createProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   const { amount, expire_year, expire_month } = req.body;
-  const result = await productsModel.updateProduct({ amount, expire_year, expire_month });
+  const result = await productsModel.updateProduct({ amount, expire_year, expire_month }, req.params.id);
   if (result.hasError) {
     return res.status(400).json({ message: 'error', result: result.error });
   }

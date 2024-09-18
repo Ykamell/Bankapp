@@ -80,8 +80,8 @@ exports.createUser = async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
-  const { id, name, lastname, password, address, email, birthdate, document_number } = req.body;
-  const result = await userModel.updateUser({ id, name, lastname, password, address, email, birthdate, document_number });
+  const { name, lastname, password, address, email, birthdate, document_number } = req.body;
+  const result = await userModel.updateUser({ name, lastname, password, address, email, birthdate, document_number }, req.params.id);
   if (result.hasError) {
     return res.status(400).json({ message: 'error', result: result.error });
   }
