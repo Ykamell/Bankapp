@@ -37,8 +37,8 @@ exports.createApplication = async (req, res) => {
 }
 
 exports.updateApplication = async (req, res) => {
-  const { amount, expire_year, expire_month } = req.body;
-  const result = await applicationsModel.updateApplication({ amount, expire_year, expire_month }, req.params.id);
+  const { product_type_id, admin_user_id, application_status_id, desired_amount } = req.body;
+  const result = await applicationsModel.updateApplication({ product_type_id, admin_user_id, application_status_id, desired_amount }, req.params.id);
   if (result.hasError) {
     return res.status(400).json({ message: 'error', result: result.error });
   }
