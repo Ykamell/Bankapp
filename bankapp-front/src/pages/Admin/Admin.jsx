@@ -30,7 +30,7 @@ export const Admin = () => {
   return (
     <Layout role="Admin" id={currentUserId}>
       <div className='admin-welcome'>
-        Hola, {user.name + ' ' + user.lastname|| 'Username'}! ¿Qué quieres hacer hoy?
+        Hi, {user.name + ' ' + user.lastname|| 'Username'}! What would you like to do today?
       </div>
 
       <div className='search-user'>

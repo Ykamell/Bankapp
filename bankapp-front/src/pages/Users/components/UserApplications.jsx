@@ -94,7 +94,7 @@ export const UserApplications = (refreshApplication) => {
 
       <div className="d-flex  flex-md-row justify-content-between mt-3">
         <Form.Group controlId="rowsPerPageSelect" className="mb-3 mb-md-0">
-          <Form.Label>Filas por página:</Form.Label>
+          <Form.Label>Rows per page:</Form.Label>
           <Form.Control
             as="select"
             value={rowsPerPage}

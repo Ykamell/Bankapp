@@ -167,7 +167,7 @@ export const ApplicationsManagement = () => {
       setSelectedUser(response);
       setUserInfoModalShow(true);
     })
-    .catch((e) => console.log('Hubo un problema: ', e));
+    .catch((e) => console.log('Error: ', e));
   } 
 
   return (
@@ -220,7 +220,7 @@ export const ApplicationsManagement = () => {
 
       <div className="d-flex flex-md-row justify-content-between align-items-center mt-3">
         <Form.Group controlId="rowsPerPageSelect" className="mb-3 mb-md-0 rows-number">
-          <Form.Label>Filas por página:</Form.Label>
+          <Form.Label>Rows per page:</Form.Label>
           <Form.Control
             as="select"
             value={rowsPerPage}

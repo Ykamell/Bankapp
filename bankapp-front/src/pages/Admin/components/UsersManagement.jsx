@@ -118,7 +118,7 @@ export const UsersManagement = () => {
         )}
 
         <Form.Group controlId="rowsPerPageSelect" className="mb-3 mb-md-0 rows-number">
-          <Form.Label>Filas por página:</Form.Label>
+          <Form.Label>Rows per page:</Form.Label>
           <Form.Control
             as="select"
             value={rowsPerPage}

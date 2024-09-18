@@ -71,10 +71,10 @@ export const Users = () => {
   return (
     <Layout id={currentUserId}>
       <div className='user-welcome'>
-        Hola {user.name + ' ' + user.lastname || 'Username'}!
+        Welcome, {user.name + ' ' + user.lastname || 'Username'}!
       </div>
       <div className='user-options'>
-        <div>Tus Productos</div>
+        <div>Your products</div>
         <Button variant="primary" onClick={() => setModalShow(true)}>Request New Product</Button>
       </div>
 
