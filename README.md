@@ -5,7 +5,6 @@
 •⁠  ⁠#setup-and-run
 •⁠  ⁠#commands
 
-
 # Project Structure
 
 This project consists of two main folders:
@@ -13,7 +12,10 @@ This project consists of two main folders:
 •⁠  ⁠⁠ bankapp-back ⁠: Backend code (Node.js)
 
 # Setup and Run
+Step 1: Clone Repository
+•⁠ Run 'git clone https://github.com/Ykamell/Bankapp.git' on your terminal/command prompt.
 
+Step 2: Install dependencies and Run
 Frontend
 
 1.⁠ ⁠Open ⁠ bankapp-front ⁠ folder in your terminal/command prompt.
@@ -37,7 +39,6 @@ Backend
 
 •⁠  ⁠⁠ npm install ⁠: Install backend dependencies
 •⁠  ⁠⁠ node index ⁠: Start backend server
-
 
 # IMPORTANT!!
 
